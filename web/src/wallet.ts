@@ -3,7 +3,7 @@ import { sepolia } from 'viem/chains';
 import type { Abi } from 'viem';
 
 /**
- * PayVERA real-wallet layer (viem + MetaMask via EIP-1193 `window.ethereum`).
+ * SpendOath real-wallet layer (viem + MetaMask via EIP-1193 `window.ethereum`).
  *
  * NO private keys, NO seed phrases, NO passwords — ever. Signing happens
  * inside MetaMask; this module only talks to the provider the user connects.
@@ -13,7 +13,7 @@ declare global {
   interface Window { ethereum?: any }
 }
 
-export const PAYVERA_ABI = [
+export const SPENDOATH_ABI = [
   {
     type: 'constructor',
     inputs: [{ name: '_merchant', type: 'address' }],

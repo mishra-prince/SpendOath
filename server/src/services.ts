@@ -12,7 +12,7 @@ export function executeService(serviceName: string, requestId: string): Record<s
     case 'Compute Job':
       return { task: 'aggregate.sum', dataset: [4, 8, 15, 16, 23, 42], claimedSum: 108 };
     case 'Data Storage': {
-      const payload = `payproof-demo-payload:${requestId}`;
+      const payload = `spendoath-demo-payload:${requestId}`;
       return { task: 'object.store', objectId: `obj_${requestId.slice(-8)}`, payload, checksum: sha256(payload) };
     }
     case 'Premium Code Audit':

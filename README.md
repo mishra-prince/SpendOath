@@ -1,9 +1,9 @@
-# PayVERA — Verified Agent Commerce
+# SpendOath — Verified Agent Commerce
 
 A deterministic, locally-runnable demo of **agentic payments with hard budget
 enforcement and cryptographic delivery verification**.
 
-- **PayVERA** is the enforcement platform: an autonomous agent can *ask*
+- **SpendOath** is the enforcement platform: an autonomous agent can *ask*
   to spend, but it can never exceed the owner's hard budget cap. Budget
   enforcement is server-side; the agent has **no** control over it.
 - **VERA** (Verification of Executed Results & Artifacts) is the delivery
@@ -22,7 +22,7 @@ Autonomous agents that pay for services create two failure modes:
 2. **Paid-for-nothing** — the agent is charged, but the delivered artifact is
    wrong, truncated, or tampered with after the fact.
 
-PayVERA closes (1) with a hard cap the agent cannot override, and closes (2)
+SpendOath closes (1) with a hard cap the agent cannot override, and closes (2)
 by refusing to accept any artifact whose hash does not match the payment
 commitment.
 
@@ -32,7 +32,7 @@ commitment.
 Agent ──request──▶ GET /api/service/:id            (no payment → HTTP 402)
                         │
                         ▼
-              PayVERA authorizes spend
+              SpendOath authorizes spend
                  ├─ within cap  → AUTHORIZED → PAID
                  └─ over cap    → REJECTED_BUDGET  (agent control: NONE)
                         │

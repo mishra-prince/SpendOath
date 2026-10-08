@@ -37,7 +37,7 @@ export default function OnChainTab(p: any) {
           <div className="flex flex-wrap items-center gap-3">
             <input className={input} placeholder="Merchant address 0x…" value={merchantInput} onChange={(e: any) => setMerchantInput(e.target.value)} />
             <button className={btn} disabled={deploying} onClick={onDeploy}>
-              {deploying ? 'Deploying…' : 'Deploy PayVeraEscrow'}
+              {deploying ? 'Deploying…' : 'Deploy SpendOathEscrow'}
             </button>
           </div>
           <p className="text-[12px] text-pp-mut">Paste any second address as the merchant (e.g. another MetaMask account). Deployment is a real Sepolia transaction — approve it in MetaMask.</p>

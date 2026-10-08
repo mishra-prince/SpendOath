@@ -4,7 +4,7 @@ import { asNumber, nowIso } from './db';
 
 export const SEED = {
   userName: 'Prince Kumar Mishra',
-  agentName: 'PayProof Agent',
+  agentName: 'SpendOath Agent',
   budgetDollars: 10,
   services: [
     { name: 'AI Translation', dollars: 2, provider: 'Provider Alpha', vera: 'EXECUTABLE', description: 'Deterministic EN→ES machine translation of a demo phrase.' },

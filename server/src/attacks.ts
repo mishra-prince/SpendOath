@@ -112,7 +112,7 @@ export function attackCompromisedAgent(db: DatabaseSync, opts: { amountDollars: 
   return { attack: 'compromised_agent', verdict: v, paymentId: payment.id as number, chargedCents: cents, walletTransaction: 'SUBMITTED', metaMaskOpened: true, detail: 'Allowed by firewall — normal purchase path.' };
 }
 
-/** 2. Unknown agent: never registered with PayVERA. */
+/** 2. Unknown agent: never registered with SpendOath. */
 export function attackUnknownAgent(db: DatabaseSync, opts: { amountDollars: number }): AttackResult {
   const v = runFirewall(db, {
     amountDollars: opts.amountDollars, serviceName: 'AI Translation', providerName: 'Provider Alpha',

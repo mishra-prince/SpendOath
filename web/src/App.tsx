@@ -44,7 +44,7 @@ function exportBudgetXlsx(policy: { maxBudgetDollars: number; spentDollars: numb
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(ledger), 'Budget');
   XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(summary), 'Summary');
-  XLSX.writeFile(wb, `PayVERA-budget-${new Date().toISOString().slice(0, 10)}.xlsx`);
+  XLSX.writeFile(wb, `SpendOath-budget-${new Date().toISOString().slice(0, 10)}.xlsx`);
 }
 
 type Tab = 'overview' | 'agent' | 'market' | 'stream' | 'budget' | 'attack' | 'onchain' | 'verify' | 'audit' | 'demo';
@@ -272,7 +272,7 @@ export default function App() {
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-[10px] bg-pp-blue text-white flex items-center justify-center font-semibold text-[15px]" style={{ letterSpacing: '-0.02em' }}>P</div>
           <div>
-              <div className="font-semibold text-[17px] leading-tight tracking-[-0.02em]">PayVERA</div>
+              <div className="font-semibold text-[17px] leading-tight tracking-[-0.02em]">SpendOath</div>
               <div className="text-[12px] text-pp-mut">Verified Agent Commerce — W3A-1</div>
             </div>
           </div>
@@ -392,7 +392,7 @@ export default function App() {
               <div className="label mb-3">The Boundary</div>
               <div className="grid md:grid-cols-2 gap-5">
                 <div className="border border-pp-line rounded-lg p-4">
-                  <div className="font-bold text-pp-green mb-1">PAYPROOF — Financial Authority</div>
+                  <div className="font-bold text-pp-green mb-1">SPENDOATH — Financial Authority</div>
                   <p className="text-sm text-pp-mut">"Can this agent spend this money?" Hard cap, policy, idempotency and payment enforcement — all decided server-side, outside the agent's reasoning.</p>
                 </div>
                 <div className="border border-pp-line rounded-lg p-4">
@@ -485,9 +485,9 @@ export default function App() {
                 const wc = W.walletClient();
                 const [account] = await wc.getAddresses();
                 const hash = await wc.deployContract({ abi: ABI as any, account, args: [merchantInput], bytecode: ESCROW_BYTECODE });
-                setChainTx({ hash, status: 'PENDING', label: 'Deploy PayVeraEscrow on Sepolia' });
+                setChainTx({ hash, status: 'PENDING', label: 'Deploy SpendOathEscrow on Sepolia' });
                 const rcpt = await W.publicClient().waitForTransactionReceipt({ hash });
-                setChainTx({ hash, status: rcpt.status.toUpperCase(), label: 'Deploy PayVeraEscrow on Sepolia' });
+                setChainTx({ hash, status: rcpt.status.toUpperCase(), label: 'Deploy SpendOathEscrow on Sepolia' });
                 if (rcpt.status === 'success' && rcpt.contractAddress) {
                   setContractAddress(rcpt.contractAddress as string);
                   localStorage.setItem('pp-escrow', rcpt.contractAddress as string);
@@ -565,12 +565,12 @@ export default function App() {
             </div>
 
             <div className="panel p-5">
-              <div className="label mb-1">PayVERA Attack Lab — 8 attacks, real firewall, zero simulation</div>
+              <div className="label mb-1">SpendOath Attack Lab — 8 attacks, real firewall, zero simulation</div>
               <p className="text-xs text-pp-mut mb-4">Every attack below runs the same backend firewall as real payments. Blocked = $0 charged, no wallet transaction submitted.</p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {[
                   { id: 'compromised_agent', label: 'Compromised Agent', desc: 'Hijacked agent demands $8' },
-                  { id: 'unknown_agent', label: 'Unknown Agent', desc: 'Never registered with PayVERA' },
+                  { id: 'unknown_agent', label: 'Unknown Agent', desc: 'Never registered with SpendOath' },
                   { id: 'spoofed_identity', label: 'Spoofed Identity', desc: 'Claims agent ID, wrong key' },
                   { id: 'fake_client_budget', label: 'Fake Client Budget', desc: 'Client lies: budget 999999' },
                   { id: 'policy_expired', label: 'Expired Policy', desc: 'Authority lapsed' },
@@ -927,7 +927,7 @@ export default function App() {
       </AnimatePresence>
 
       <footer className="max-w-7xl mx-auto px-5 pb-10 pt-2 text-[11px] text-pp-mut">
-        PayVERA protects your money and proves the work. · Local deterministic demo · x402-compatible HTTP 402 flow
+        SpendOath protects your money and proves the work. · Local deterministic demo · x402-compatible HTTP 402 flow
       </footer>
     </div>
   );
@@ -1088,7 +1088,7 @@ function SheetBody({
     <div className="p-5">
       {/* header */}
       <div className="flex items-center justify-between mb-4">
-        <span className="text-[12px] tracking-[-0.01em] text-pp-mut font-medium">PayVERA · Agent Payment</span>
+        <span className="text-[12px] tracking-[-0.01em] text-pp-mut font-medium">SpendOath · Agent Payment</span>
         {sheet.phase !== 'processing' && (
           <button onClick={onClose} className="text-pp-mut hover:text-pp-ink text-lg leading-none px-2" aria-label="Close">×</button>
         )}

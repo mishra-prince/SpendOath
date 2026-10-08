@@ -1,5 +1,5 @@
 {
-  "name": "payproof-server",
+  "name": "spendoath-server",
   "private": true,
   "version": "1.0.0",
   "type": "module",

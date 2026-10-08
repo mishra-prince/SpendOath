@@ -4,10 +4,10 @@ import { nowIso } from './db';
 import { uid } from './canonical';
 
 /**
- * PayVERA cryptographic agent identity (hackathon-grade, deterministic).
+ * SpendOath cryptographic agent identity (hackathon-grade, deterministic).
  *
- * Honest scope: PayVERA can cryptographically identify and attribute agents
- * that are REGISTERED with PayVERA. An unknown agent or an unverified
+ * Honest scope: SpendOath can cryptographically identify and attribute agents
+ * that are REGISTERED with SpendOath. An unknown agent or an unverified
  * signature is NOT authenticated — a client-claimed agentId alone proves
  * nothing.
  */
@@ -45,7 +45,7 @@ export interface IntentToSign {
 export function canonicalIntentBytes(intent: IntentToSign): Buffer {
   // Deterministic, order-stable serialization. Any field change breaks the signature.
   const parts = [
-    'PAYVERA-INTENT-V1',
+    'SPENDOATH-INTENT-V1',
     `agentId=${intent.agentId}`,
     `requestId=${intent.requestId}`,
     `service=${intent.service}`,

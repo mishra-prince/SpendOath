@@ -1,4 +1,4 @@
-# PayVERA — Architecture
+# SpendOath — Architecture
 
 ## Components
 
@@ -30,7 +30,7 @@ re-charged or silently re-opened.
 
 ## The two enforcement points
 
-1. **Budget (PayVERA).** `policy.tryDebit` is the *only* place money moves. It
+1. **Budget (SpendOath).** `policy.tryDebit` is the *only* place money moves. It
    checks `remaining >= amount`, and on failure sets `REJECTED_BUDGET` and
    returns without charging. The agent calls `agentRequest`, which *asks*
    `tryDebit`; it cannot bypass it. Budget enforcement is server-side and
@@ -82,7 +82,7 @@ sha256`, `hashValid`). `finalStatus` ∈ `VERIFIED | FAILED | PENDING | REJECTED
   exercised over live HTTP instead.
 ## §18 On-chain settlement path (optional increment, implemented)
 
-`contracts/PayVeraEscrow.sol` (Solidity ^0.8.24, compiles clean under solc
+`contracts/SpendOathEscrow.sol` (Solidity ^0.8.24, compiles clean under solc
 with 200-run optimizer) mirrors the off-chain engine's three guarantees on
 EVM:
 

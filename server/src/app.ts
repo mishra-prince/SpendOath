@@ -18,7 +18,7 @@ export function createApp(db: DatabaseSync): Express {
   app.use(express.json({ limit: '1mb' }));
 
   app.get('/api/health', (_req, res) => {
-    res.json({ ok: true, product: 'PayVERA', mode: 'local deterministic simulation (x402-compatible HTTP 402)', time: nowIso() });
+    res.json({ ok: true, product: 'SpendOath', mode: 'local deterministic simulation (x402-compatible HTTP 402)', time: nowIso() });
   });
 
   app.post('/api/reset', (_req, res) => {
@@ -167,7 +167,7 @@ export function createApp(db: DatabaseSync): Express {
     }
   });
 
-  // ---------- PAYVERA ATTACK LAB (real firewall, real enforcement) ----------
+  // ---------- SPENDOATH ATTACK LAB (real firewall, real enforcement) ----------
   app.post('/api/attack-lab/run', (req, res) => {
     const kind = String(req.body?.attack ?? '');
     const amountDollars = req.body?.amountDollars != null ? Number(req.body.amountDollars) : 8;

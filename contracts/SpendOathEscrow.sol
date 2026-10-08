@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-/// @title PayVeraEscrow (v2 — real Sepolia deployment)
-/// @notice On-chain financial authority for PayVERA (ONE HACK 2026 W3A-1).
+/// @title SpendOathEscrow (v2 — real Sepolia deployment)
+/// @notice On-chain financial authority for SpendOath (ONE HACK 2026 W3A-1).
 ///         Owner grants spending authority; authorized agents pay merchants.
 ///         THE CONTRACT IS THE FINAL ENFORCEMENT LAYER: the hard cap, max
 ///         transaction limit and destination checks live HERE, in Solidity.
@@ -14,7 +14,7 @@ pragma solidity ^0.8.24;
 ///         `pay()` can be called by anyone (frontend, backend relayer, or the
 ///         agent) — it does not matter, because the authority state is checked
 ///         entirely on-chain.
-contract PayVeraEscrow {
+contract SpendOathEscrow {
     address public owner;                 // human who funds + grants authority
     address public merchant;              // payment recipient (provider)
     uint256 public budget;                // total authorized spending (wei)

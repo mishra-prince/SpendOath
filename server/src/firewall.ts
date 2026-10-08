@@ -5,7 +5,7 @@ import { verifyIntentSignature, checkAndBurnNonce, type IntentToSign } from './i
 import { audit } from './engine';
 
 /**
- * PAYVERA AGENT FIREWALL
+ * SPENDOATH AGENT FIREWALL
  *
  * The single, authoritative, backend enforcement layer. Runs BEFORE payment
  * authorization on every payment request. It is NOT a frontend rule, NOT a
@@ -106,7 +106,7 @@ export function runFirewall(db: DatabaseSync, req: FirewallRequest): FirewallVer
     v.decision = 'UNKNOWN_AGENT';
     v.reason = 'AGENT_NOT_REGISTERED';
     chk('WHO', 'FAIL', `no registered agent "${req.claimedAgentExternalId ?? '<none claimed>'}"`);
-    audit(db, 'INVALID_AGENT', `UNKNOWN_AGENT: agent "${req.claimedAgentExternalId ?? ''}" is not registered with PayVERA`, {
+    audit(db, 'INVALID_AGENT', `UNKNOWN_AGENT: agent "${req.claimedAgentExternalId ?? ''}" is not registered with SpendOath`, {
       requestId: req.requestId, metadata: { claimedAgentId: req.claimedAgentExternalId ?? null, attackerWallet: req.attackerWallet ?? null },
     });
     audit(db, 'PAYMENT_NOT_AUTHORIZED', 'Firewall blocked before payment authorization: unknown agent', { requestId: req.requestId });

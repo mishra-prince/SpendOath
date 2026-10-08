@@ -215,7 +215,7 @@ export interface AgentRequestResult {
 }
 
 /**
- * The deterministic agent attempts to buy a service. PayVERA (this server)
+ * The deterministic agent attempts to buy a service. SpendOath (this server)
  * decides whether the spend is authorized — the agent is never trusted with
  * budget enforcement.
  */
@@ -243,7 +243,7 @@ export function agentRequest(db: DatabaseSync, opts: { serviceId: number; simula
   const debit = tryDebit(db, agentId, service.priceCents);
   if (!debit.ok) {
     setPaymentStatus(db, payment.id, STATES.REJECTED_BUDGET);
-    push('ENFORCEMENT_BLOCK', `PayVERA BLOCKED payment: $${dollars(service.priceCents)} > remaining $${dollars(debit.remainingCents)}`, { reason: debit.reason });
+    push('ENFORCEMENT_BLOCK', `SpendOath BLOCKED payment: $${dollars(service.priceCents)} > remaining $${dollars(debit.remainingCents)}`, { reason: debit.reason });
     audit(db, 'OVERSPEND_BLOCKED', `Payment BLOCKED by hard cap: requested $${dollars(service.priceCents)}, remaining $${dollars(debit.remainingCents)}`, {
       requestId, paymentId: payment.id,
       metadata: undefined as never,
@@ -263,7 +263,7 @@ export function agentRequest(db: DatabaseSync, opts: { serviceId: number; simula
   }
 
   setPaymentStatus(db, payment.id, STATES.AUTHORIZED);
-  push('AUTHORIZED', `PayVERA authorized $${dollars(service.priceCents)} (spent $${dollars(debit.spentBefore)} → $${dollars(debit.spentAfter)})`);
+  push('AUTHORIZED', `SpendOath authorized $${dollars(service.priceCents)} (spent $${dollars(debit.spentBefore)} → $${dollars(debit.spentAfter)})`);
   audit(db, 'PAYMENT_AUTHORIZED', `Payment authorized within hard cap ($${dollars(service.priceCents)})`, { requestId, paymentId: payment.id });
 
   setPaymentStatus(db, payment.id, STATES.PAID);
@@ -413,7 +413,7 @@ export function overspendAttack(db: DatabaseSync, opts: { serviceId?: number; am
   setPaymentStatus(db, payment.id, STATES.PAID);
   const delivery = deliver(db, getPayment(db, payment.id)!);
   const verified = verifyDelivery(db, delivery.id);
-  push('PAID', `Amount fit inside the budget, so PayVERA honestly allowed it ($${dollars(amountCents)}). Not an overspend.`);
+  push('PAID', `Amount fit inside the budget, so SpendOath honestly allowed it ($${dollars(amountCents)}). Not an overspend.`);
   audit(db, 'PAYMENT_SETTLED', `Attack-lab amount was within budget and settled: $${dollars(amountCents)}`, { requestId, paymentId: payment.id });
   return {
     outcome: 'NOT_AN_OVERSPEND', requestId, idempotencyKey, requestedDollars: dollars(amountCents),
